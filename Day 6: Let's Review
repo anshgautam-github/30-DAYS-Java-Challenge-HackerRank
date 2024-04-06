@@ -1,0 +1,45 @@
+// Task :    Given a string, print its even-indexed and odd-indexed characters as  space-separated strings on a single line 
+// Input Format: 
+// The first line contains an integer,  (the number of test cases).
+// Each line i of the T subsequent lines contain a string,S .
+
+
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+        
+        // Read the number of test cases
+        int numTestCases = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+        
+        // Process each test case
+        for (int i = 0; i < numTestCases; i++) {
+            String inputString = scanner.nextLine();
+            printEvenOdd(inputString);
+        }
+        
+        scanner.close();
+    }
+    
+    // Function to print even-indexed and odd-indexed characters of a string
+    public static void printEvenOdd(String string) {
+        StringBuilder evenChars = new StringBuilder();
+        StringBuilder oddChars = new StringBuilder();
+        
+        for (int i = 0; i < string.length(); i++) {
+            if (i % 2 == 0) {
+                evenChars.append(string.charAt(i));
+            } else {
+                oddChars.append(string.charAt(i));
+            }
+        }
+        
+        System.out.println(evenChars + " " + oddChars);
+    }
+}
+
