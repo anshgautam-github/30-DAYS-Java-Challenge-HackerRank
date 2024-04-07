@@ -1,1 +1,1 @@
-# 30-DAYS-Java-Challenge (HACKERRANK)
+# 30-DAYS-Java-Challenge (HackerRank)
