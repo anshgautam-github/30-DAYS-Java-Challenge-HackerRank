@@ -1,0 +1,117 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+
+        List<List<Integer>> arr = new ArrayList<>();
+
+        for (int i = 0; i < 6; i++) {
+            String[] arrRowTempItems = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
+
+            List<Integer> arrRowItems = new ArrayList<>();
+
+            for (int j = 0; j < 6; j++) {
+                int arrItem = Integer.parseInt(arrRowTempItems[j]);
+                arrRowItems.add(arrItem);
+            }
+
+            arr.add(arrRowItems);
+        }
+
+        bufferedReader.close();
+  
+         int maxHourglassSum = Integer.MIN_VALUE;
+
+        // Iterate over each cell as the center of an hourglass
+        for (int i = 1; i < 5; i++) {
+            for (int j = 1; j < 5; j++) {
+                // Calculate the sum of the hourglass
+                int hourglassSum = arr.get(i - 1).get(j - 1) + arr.get(i - 1).get(j) + arr.get(i - 1).get(j + 1)
+                                   + arr.get(i).get(j)
+                                   + arr.get(i + 1).get(j - 1) + arr.get(i + 1).get(j) + arr.get(i + 1).get(j + 1);
+                
+                // Update maxHourglassSum if necessary
+                maxHourglassSum = Math.max(maxHourglassSum, hourglassSum);
+            }
+        }
+
+        System.out.println(maxHourglassSum);
+    }
+}
+
+
+
+
+For example, given the following 2D array:
+
+1 1 1 0 0 0
+0 1 0 0 0 0
+1 1 1 0 0 0
+0 0 2 4 4 0
+0 0 0 2 0 0
+0 0 1 2 4 0
+The hourglasses would be:
+
+
+1 1 1   1 1 0   1 0 0   0 0 0
+  1       0       0       0
+1 1 1   1 1 0   1 0 0   0 0 0
+
+0 1 0   1 0 0   0 0 0   0 0 0
+  1       1       0       0
+0 0 2   0 2 4   2 4 4   4 4 0
+
+1 1 1   1 1 0   1 0 0   0 0 0
+  0       2       4       4
+0 0 0   0 0 2   0 2 0   2 0 0
+
+0 0 2   0 2 4   2 4 4   4 4 0
+  0       0       2       0
+0 0 1   0 1 2   1 2 4   2 4 0
+
+
+
+And the maximum sum would be 19 for the hourglass:
+
+2 4 4
+  2
+1 2 4
+
+
+Certainly! In the provided Java solution, the goal is to calculate the sum of each hourglass in the 6x6 2D array. To calculate the sum of an hourglass, we sum up all the elements that form the hourglass pattern.
+
+Let's break down the hourglass pattern:
+
+a b c
+  d
+e f g
+In this pattern, d is the center element of the hourglass, and a, b, c, e, f, g are its surrounding elements.
+
+To calculate the sum of this hourglass, we simply add up all these elements:
+
+sum = a + b + c + d + e + f + g
+Now, let's map this to the indices of our 2D array. Suppose (i, j) is the center position of the hourglass, then the surrounding elements are located at:
+
+a: (i-1, j-1)
+b: (i-1, j)
+c: (i-1, j+1)
+d: (i, j)
+e: (i+1, j-1)
+f: (i+1, j)
+g: (i+1, j+1)
+So, to calculate the sum of the hourglass centered at position (i, j) in the 2D array, we would sum up the elements at these indices:
+
+int hourglassSum = arr.get(i - 1).get(j - 1) + arr.get(i - 1).get(j) + arr.get(i - 1).get(j + 1)
+                   + arr.get(i).get(j)
+                   + arr.get(i + 1).get(j - 1) + arr.get(i + 1).get(j) + arr.get(i + 1).get(j + 1);
+This code calculates the sum of the hourglass with center (i, j) by accessing the elements at the appropriate indices in the 2D array arr.
+
